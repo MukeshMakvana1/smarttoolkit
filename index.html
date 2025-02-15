@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5339184007828603"
+     crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0066ff">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Web Multi-Tool Suite</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.css">
+</head>
+<body class="light-theme">
+    <header>
+        <nav>
+            <h1>Web Multi-Tool Suite</h1>
+            <button id="themeToggle" aria-label="Toggle theme">
+                <span class="theme-icon">🌙</span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <div class="tools-container">
+            <!-- Image Compressor -->
+            <section class="tool-card" id="imageCompressor">
+                <h2>Image Compressor</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="compressImage" accept="image/*">
+                        <div class="compression-controls">
+                            <label for="compressionLevel">Quality:</label>
+                            <input type="range" id="compressionLevel" min="0" max="100" value="80">
+                            <span id="qualityValue">80%</span>
+                        </div>
+                        <div class="image-preview"></div>
+                        <button class="process-btn" id="compressBtn">Compress Image</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Image to Icon -->
+            <section class="tool-card" id="imageToIcon">
+                <h2>Image to Icon Converter</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="iconImage" accept="image/*">
+                        <div class="icon-options">
+                            <select id="iconFormat">
+                                <option value="ico">ICO</option>
+                                <option value="png">PNG</option>
+                                <option value="svg">SVG</option>
+                            </select>
+                            <select id="iconSize">
+                                <option value="16">16x16</option>
+                                <option value="32" selected>32x32</option>
+                                <option value="48">48x48</option>
+                                <option value="64">64x64</option>
+                                <option value="128">128x128</option>
+                            </select>
+                        </div>
+                        <div class="image-preview"></div>
+                        <button class="process-btn" id="convertToIconBtn">Convert to Icon</button>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Image Resizer -->
+            <section class="tool-card" id="imageResizer">
+                <h2>Image Resizer</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="resizeImage" accept="image/*">
+                        <div class="resize-options">
+                            <div class="dimension-inputs">
+                                <div class="input-group">
+                                    <label for="widthInput">Width:</label>
+                                    <input type="number" id="widthInput" placeholder="Width">
+                                </div>
+                                <div class="input-group">
+                                    <label for="heightInput">Height:</label>
+                                    <input type="number" id="heightInput" placeholder="Height">
+                                </div>
+                                <label>
+                                    <input type="checkbox" id="maintainAspectRatio" checked>
+                                    Maintain Aspect Ratio
+                                </label>
+                            </div>
+                        </div>
+                        <div class="image-preview"></div>
+                        <button class="process-btn" id="resizeBtn">Resize Image</button>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Image Cropper -->
+            <section class="tool-card" id="imageCropper">
+                <h2>Image Cropper</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="cropImage" accept="image/*">
+                        <div class="crop-container">
+                            <div class="crop-area"></div>
+                        </div>
+                        <div class="crop-controls">
+                            <button class="process-btn" id="cropBtn">Crop Image</button>
+                            <button class="process-btn" id="resetCropBtn">Reset</button>
+                        </div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Image to Text -->
+            <section class="tool-card" id="imageToText">
+                <h2>Image to Text (OCR)</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="ocrImage" accept="image/*">
+                        <div class="ocr-options">
+                            <select id="ocrLanguage">
+                                <option value="eng">English</option>
+                                <option value="fra">French</option>
+                                <option value="deu">German</option>
+                                <option value="spa">Spanish</option>
+                            </select>
+                        </div>
+                        <div class="image-preview"></div>
+                        <button class="process-btn" id="extractTextBtn">Extract Text</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Icon Converter -->
+            <section class="tool-card" id="iconConverter">
+                <h2>Image to Icon Converter</h2>
+                <div class="tool-content">
+                    <input type="file" id="iconImage" accept="image/*">
+                    <div class="format-selection">
+                        <label for="iconFormat">Format:</label>
+                        <select id="iconFormat">
+                            <option value="ico">.ico</option>
+                            <option value="png">.png</option>
+                            <option value="svg">.svg</option>
+                        </select>
+                    </div>
+                    <button class="process-btn">Convert to Icon</button>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- PDF Watermark -->
+            <section class="tool-card" id="pdfWatermark">
+                <h2>PDF Watermark Maker</h2>
+                <div class="tool-content">
+                    <input type="file" id="pdfFile" accept=".pdf">
+                    <div class="watermark-controls">
+                        <input type="text" id="watermarkText" placeholder="Watermark Text">
+                        <input type="file" id="watermarkImage" accept="image/*">
+                        <label for="opacity">Opacity:</label>
+                        <input type="range" id="opacity" min="0" max="100" value="50">
+                    </div>
+                    <button class="process-btn">Add Watermark</button>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Text Case Converter -->
+            <section class="tool-card" id="textCaseConverter">
+                <h2>Text Case Converter</h2>
+                <div class="tool-content">
+                    <textarea id="textInput" placeholder="Enter your text here..." rows="5"></textarea>
+                    <div class="button-group">
+                        <button class="process-btn" data-case="upper">UPPERCASE</button>
+                        <button class="process-btn" data-case="lower">lowercase</button>
+                        <button class="process-btn" data-case="title">Title Case</button>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- Text to Speech -->
+            <section class="tool-card" id="textToSpeech">
+                <h2>Text to Speech</h2>
+                <div class="tool-content">
+                    <textarea id="speechText" placeholder="Enter text to convert to speech..." rows="5"></textarea>
+                    <div class="speech-controls">
+                        <select id="voiceSelect">
+                            <option value="">Select Voice</option>
+                        </select>
+                        <div class="rate-control">
+                            <label for="speechRate">Speed:</label>
+                            <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
+                            <span id="rateValue">1x</span>
+                        </div>
+                    </div>
+                    <button class="process-btn" id="speakButton">
+                        <span class="icon">🔊</span> Speak
+                    </button>
+                    <button class="process-btn" id="pauseButton" disabled>
+                        <span class="icon">⏸️</span> Pause
+                    </button>
+                </div>
+            </section>
+
+            <!-- QR Code Tool -->
+            <section class="tool-card" id="qrTool">
+                <h2>QR Code Generator & Scanner</h2>
+                <div class="tool-content">
+                    <div class="tab-controls">
+                        <button class="tab-btn active" data-tab="generate">Generate</button>
+                        <button class="tab-btn" data-tab="scan">Scan</button>
+                    </div>
+                    
+                    <div class="tab-content" id="generateQR">
+                        <input type="text" id="qrInput" placeholder="Enter text or URL">
+                        <select id="qrSize">
+                            <option value="128">Small (128x128)</option>
+                            <option value="256" selected>Medium (256x256)</option>
+                            <option value="512">Large (512x512)</option>
+                        </select>
+                        <button class="process-btn" id="generateQRBtn">Generate QR Code</button>
+                        <div class="qr-result"></div>
+                    </div>
+
+                    <div class="tab-content hidden" id="scanQR">
+                        <div class="camera-container">
+                            <div id="reader"></div>
+                        </div>
+                        <div class="scan-result"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- JSON Formatter -->
+            <section class="tool-card" id="jsonFormatter">
+                <h2>JSON Formatter</h2>
+                <div class="tool-content">
+                    <div class="editor-controls">
+                        <button class="control-btn" id="formatJSON">Format</button>
+                        <button class="control-btn" id="minifyJSON">Minify</button>
+                        <button class="control-btn" id="validateJSON">Validate</button>
+                    </div>
+                    <div class="editor-container">
+                        <textarea id="jsonInput" placeholder="Paste your JSON here..."></textarea>
+                    </div>
+                    <div class="json-status"></div>
+                </div>
+            </section>
+
+            <!-- Code Minifier -->
+            <section class="tool-card" id="codeMinifier">
+                <h2>Code Minifier</h2>
+                <div class="tool-content">
+                    <div class="tab-controls">
+                        <button class="tab-btn active" data-type="html">HTML</button>
+                        <button class="tab-btn" data-type="css">CSS</button>
+                        <button class="tab-btn" data-type="js">JavaScript</button>
+                    </div>
+                    <textarea id="minifierInput" placeholder="Paste your code here..." rows="10"></textarea>
+                    <button class="process-btn" id="minifyBtn">Minify Code</button>
+                    <div class="result-area">
+                        <textarea id="minifierOutput" readonly rows="10"></textarea>
+                        <button class="process-btn copy-btn">Copy Minified Code</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Base64 Tool -->
+            <section class="tool-card" id="base64Tool">
+                <h2>Base64 Encoder/Decoder</h2>
+                <div class="tool-content">
+                    <div class="tab-controls">
+                        <button class="tab-btn active" data-action="encode">Encode</button>
+                        <button class="tab-btn" data-action="decode">Decode</button>
+                    </div>
+                    <textarea id="base64Input" placeholder="Enter text to encode/decode..." rows="6"></textarea>
+                    <div class="file-input-container">
+                        <input type="file" id="base64File" class="hidden">
+                        <button class="process-btn" id="base64FileBtn">Upload File</button>
+                    </div>
+                    <button class="process-btn" id="base64ProcessBtn">Process</button>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- JavaScript Beautifier -->
+            <section class="tool-card" id="jsBeautifier">
+                <h2>JavaScript Beautifier</h2>
+                <div class="tool-content">
+                    <div class="beautifier-options">
+                        <label>
+                            <input type="checkbox" id="beautifyIndent" checked> 
+                            Use Tab Indentation
+                        </label>
+                        <label>
+                            <input type="checkbox" id="beautifySpaces" checked> 
+                            Add Spaces
+                        </label>
+                    </div>
+                    <textarea id="beautifierInput" placeholder="Paste your JavaScript code here..." rows="10"></textarea>
+                    <button class="process-btn" id="beautifyBtn">Beautify Code</button>
+                    <div class="result-area">
+                        <textarea id="beautifierOutput" readonly rows="10"></textarea>
+                        <button class="process-btn copy-btn">Copy Beautified Code</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Regex Tester -->
+            <section class="tool-card" id="regexTester">
+                <h2>Regex Tester</h2>
+                <div class="tool-content">
+                    <div class="regex-input">
+                        <input type="text" id="regexPattern" placeholder="Enter regex pattern (e.g., \w+)">
+                        <div class="regex-flags">
+                            <label><input type="checkbox" value="g" checked> Global</label>
+                            <label><input type="checkbox" value="i"> Case-insensitive</label>
+                            <label><input type="checkbox" value="m"> Multiline</label>
+                        </div>
+                    </div>
+                    <textarea id="regexText" placeholder="Enter text to test against..." rows="6"></textarea>
+                    <button class="process-btn" id="testRegexBtn">Test Regex</button>
+                    <div class="result-area">
+                        <div class="matches-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Color Tools -->
+            <section class="tool-card" id="colorTools">
+                <h2>Color Picker & Gradient Generator</h2>
+                <div class="tool-content">
+                    <div class="tab-controls">
+                        <button class="tab-btn active" data-tool="picker">Color Picker</button>
+                        <button class="tab-btn" data-tool="gradient">Gradient Generator</button>
+                    </div>
+                    
+                    <div class="color-picker-container">
+                        <input type="color" id="colorPicker">
+                        <div class="color-values">
+                            <input type="text" id="hexValue" placeholder="#000000">
+                            <input type="text" id="rgbValue" placeholder="rgb(0,0,0)">
+                            <input type="text" id="hslValue" placeholder="hsl(0,0%,0%)">
+                        </div>
+                    </div>
+                    
+                    <div class="gradient-container hidden">
+                        <div class="gradient-controls">
+                            <div class="color-stops">
+                                <input type="color" id="gradientColor1" value="#ff0000">
+                                <input type="color" id="gradientColor2" value="#0000ff">
+                            </div>
+                            <select id="gradientType">
+                                <option value="linear">Linear Gradient</option>
+                                <option value="radial">Radial Gradient</option>
+                            </select>
+                            <input type="range" id="gradientAngle" min="0" max="360" value="90">
+                        </div>
+                        <div class="gradient-preview"></div>
+                        <div class="gradient-code"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Unit Converter -->
+            <section class="tool-card" id="unitConverter">
+                <h2>Unit Converter</h2>
+                <div class="tool-content">
+                    <select id="unitType" class="unit-select">
+                        <option value="length">Length</option>
+                        <option value="weight">Weight</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="area">Area</option>
+                        <option value="volume">Volume</option>
+                    </select>
+                    <div class="converter-inputs">
+                        <div class="input-group">
+                            <input type="number" id="fromValue" placeholder="Enter value">
+                            <select id="fromUnit"></select>
+                        </div>
+                        <button class="swap-btn">⇄</button>
+                        <div class="input-group">
+                            <input type="number" id="toValue" readonly>
+                            <select id="toUnit"></select>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Password Generator -->
+            <section class="tool-card" id="passwordGenerator">
+                <h2>Password Generator</h2>
+                <div class="tool-content">
+                    <div class="password-display">
+                        <input type="text" id="generatedPassword" readonly>
+                        <button class="copy-btn" title="Copy to clipboard">📋</button>
+                    </div>
+                    <div class="password-options">
+                        <div class="length-control">
+                            <label for="passwordLength">Length: <span id="lengthValue">12</span></label>
+                            <input type="range" id="passwordLength" min="8" max="64" value="12">
+                        </div>
+                        <div class="checkbox-group">
+                            <label><input type="checkbox" id="includeUppercase" checked> Uppercase</label>
+                            <label><input type="checkbox" id="includeLowercase" checked> Lowercase</label>
+                            <label><input type="checkbox" id="includeNumbers" checked> Numbers</label>
+                            <label><input type="checkbox" id="includeSymbols" checked> Symbols</label>
+                        </div>
+                    </div>
+                    <button class="process-btn" id="generatePasswordBtn">Generate Password</button>
+                </div>
+            </section>
+
+            <!-- Currency Converter -->
+            <section class="tool-card" id="currencyConverter">
+                <h2>Currency Converter</h2>
+                <div class="tool-content">
+                    <div class="converter-inputs">
+                        <div class="input-group">
+                            <input type="number" id="fromAmount" placeholder="Enter amount">
+                            <select id="fromCurrency"></select>
+                        </div>
+                        <button class="swap-btn">⇄</button>
+                        <div class="input-group">
+                            <input type="number" id="toAmount" readonly>
+                            <select id="toCurrency"></select>
+                        </div>
+                    </div>
+                    <button class="process-btn" id="convertCurrencyBtn">Convert</button>
+                    <div class="exchange-rate">
+                        <span id="rateInfo">1 USD = ...</span>
+                        <span id="lastUpdate"></span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- IP Lookup -->
+            <section class="tool-card" id="ipLookup">
+                <h2>IP Address Lookup</h2>
+                <div class="tool-content">
+                    <div class="ip-input">
+                        <input type="text" id="ipAddress" placeholder="Enter IP address (or leave empty for your IP)">
+                        <button class="process-btn" id="lookupBtn">Lookup</button>
+                    </div>
+                    <div class="ip-result">
+                        <div class="result-grid"></div>
+                        <div id="ipMap" class="map-container"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Time Zone Converter -->
+            <section class="tool-card" id="timeZoneConverter">
+                <h2>Time Zone Converter</h2>
+                <div class="tool-content">
+                    <div class="time-inputs">
+                        <div class="source-time">
+                            <input type="datetime-local" id="sourceTime">
+                            <select id="sourceTimezone"></select>
+                        </div>
+                        <div class="target-zones" id="targetTimeZones">
+                            <!-- Dynamic time zone rows will be added here -->
+                        </div>
+                        <button class="process-btn add-timezone">+ Add Time Zone</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PDF to Word Converter -->
+            <section class="tool-card" id="pdfToWord">
+                <h2>PDF to Word Converter</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="pdfFile" accept=".pdf">
+                        <button class="process-btn" id="convertToWordBtn">Convert to Word</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- PDF Merger -->
+            <section class="tool-card" id="pdfMerger">
+                <h2>PDF Merger</h2>
+                <div class="tool-content">
+                    <div class="pdf-list" id="pdfList">
+                        <!-- PDF files will be listed here -->
+                    </div>
+                    <div class="file-input">
+                        <input type="file" id="pdfFiles" accept=".pdf" multiple>
+                        <button class="process-btn" id="addPdfBtn">Add PDFs</button>
+                    </div>
+                    <div class="pdf-controls">
+                        <button class="process-btn" id="mergePdfBtn" disabled>Merge PDFs</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- PDF Splitter -->
+            <section class="tool-card" id="pdfSplitter">
+                <h2>PDF Splitter</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="pdfToSplit" accept=".pdf">
+                    </div>
+                    <div class="split-options hidden">
+                        <div class="page-range">
+                            <input type="text" id="pageRange" placeholder="e.g., 1-3,5,7-9">
+                            <span class="hint">Enter page ranges or individual pages</span>
+                        </div>
+                        <button class="process-btn" id="splitPdfBtn">Split PDF</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- PDF to Image -->
+            <section class="tool-card" id="pdfToImage">
+                <h2>PDF to Image Converter</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="pdfForImage" accept=".pdf">
+                    </div>
+                    <div class="conversion-options hidden">
+                        <select id="imageFormat">
+                            <option value="png">PNG</option>
+                            <option value="jpeg">JPEG</option>
+                        </select>
+                        <select id="imageQuality">
+                            <option value="high">High Quality</option>
+                            <option value="medium">Medium Quality</option>
+                            <option value="low">Low Quality</option>
+                        </select>
+                        <button class="process-btn" id="convertToImageBtn">Convert to Images</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+
+            <!-- PDF to Excel Converter -->
+            <section class="tool-card" id="pdfToExcel">
+                <h2>PDF to Excel Converter</h2>
+                <div class="tool-content">
+                    <div class="file-input">
+                        <input type="file" id="pdfForExcel" accept=".pdf">
+                        <div class="excel-options">
+                            <label>
+                                <input type="checkbox" id="includeHeaders" checked>
+                                First Row as Headers
+                            </label>
+                            <label>
+                                <input type="checkbox" id="detectTables" checked>
+                                Auto-detect Tables
+                            </label>
+                        </div>
+                        <button class="process-btn" id="convertToExcelBtn">Convert to Excel</button>
+                    </div>
+                    <div class="progress-bar hidden">
+                        <div class="progress"></div>
+                    </div>
+                    <div class="result-area"></div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Web Multi-Tool Suite. All rights reserved.</p>
+    </footer>
+
+    <script src="js/themeToggle.js"></script>
+    <script src="js/imageCompressor.js"></script>
+    <script src="js/iconConverter.js"></script>
+    <script src="js/pdfWatermark.js"></script>
+    <script src="js/textCaseConverter.js"></script>
+    <script src="js/textToSpeech.js"></script>
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="https://unpkg.com/html5-qrcode"></script>
+    <script src="js/qrTool.js"></script>
+    <script src="js/jsonFormatter.js"></script>
+    <script src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js"></script>
+    <script src="js/codeMinifier.js"></script>
+    <script src="js/base64Tool.js"></script>
+    <script src="js/jsBeautifier.js"></script>
+    <script src="js/regexTester.js"></script>
+    <script src="js/colorTools.js"></script>
+    <script src="js/unitConverter.js"></script>
+    <script src="js/passwordGenerator.js"></script>
+    <script src="js/currencyConverter.js"></script>
+    <script src="js/ipLookup.js"></script>
+    <script src="js/timeZoneConverter.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js"></script>
+    <script src="js/pdfToWord.js"></script>
+    <script src="js/pdfMerger.js"></script>
+    <script src="js/pdfSplitter.js"></script>
+    <script src="js/pdfToImage.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.12/cropper.min.js"></script>
+    <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+    <script src="js/imageResizer.js"></script>
+    <script src="js/imageCropper.js"></script>
+    <script src="js/imageToText.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.8.2/docx.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="js/pdfToExcel.js"></script>
+    <script src="js/dragDrop.js"></script>
+</body>
+</html> 
